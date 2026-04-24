@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ArtuPower — Alternative Fuel Solutions</title>
+  <link rel="icon" href="https://www.artupower.eu/wp-content/uploads/cropped-ABLabs_logo_favicon-32x32.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d1b2a;
+      --navy2: #162032;
+      --blue: #099fdc;
+      --green: #3aac5d;
+      --white: #ffffff;
+      --gray: #f5f7fa;
+      --text: #262c36;
+      --muted: #6c757d;
+      --border: rgba(0,0,0,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: var(--text); background: #fff; overflow-x: hidden; }
+
+    /* ─── NAV ─────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(13,27,42,0.96); backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 70px;
+    }
+    .nav-logo img { height: 40px; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.88rem; font-weight: 600; letter-spacing: 0.02em; transition: color .2s; }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-right { display: flex; align-items: center; gap: 14px; }
+    .lang-btn {
+      background: transparent; border: 1.5px solid rgba(255,255,255,0.3); color: #fff;
+      padding: 6px 14px; border-radius: 4px; font-size: 0.82rem; font-weight: 700;
+      cursor: pointer; letter-spacing: 0.06em; transition: all .2s;
+    }
+    .lang-btn:hover, .lang-btn.active { background: var(--blue); border-color: var(--blue); }
+    .nav-cta {
+      background: var(--blue); color: #fff; border: none; padding: 8px 20px;
+      border-radius: 4px; font-size: 0.82rem; font-weight: 700; cursor: pointer;
+      text-decoration: none; letter-spacing: 0.04em; transition: background .2s;
+    }
+    .nav-cta:hover { background: #0880b5; }
+    .hamburger { display: none; background: none; border: none; color: #fff; cursor: pointer; font-size: 1.4rem; }
+
+    /* ─── HERO ────────────────────────────────────────────── */
+    .hero {
+      position: relative; min-height: 100vh;
+      background: url('https://www.artupower.eu/wp-content/uploads/hero-1.jpg') center/cover no-repeat;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .hero::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(120deg, rgba(13,27,42,0.82) 0%, rgba(13,27,42,0.45) 60%, rgba(13,27,42,0.1) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 1; padding: 130px 40px 60px;
+      max-width: 720px;
+    }
+    .hero-badge {
+      display: inline-block; background: var(--blue); color: #fff;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 3px; margin-bottom: 20px;
+    }
+    .hero-title {
+      font-size: clamp(2rem, 5vw, 3.6rem); font-weight: 800; color: #fff;
+      line-height: 1.1; text-transform: uppercase; letter-spacing: -0.01em; margin-bottom: 20px;
+    }
+    .hero-title span { color: var(--blue); }
+    .hero-subtitle { font-size: 1.05rem; color: rgba(255,255,255,0.8); line-height: 1.7; margin-bottom: 36px; max-width: 540px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--blue); color: #fff; border: none; padding: 14px 32px;
+      border-radius: 4px; font-size: 0.9rem; font-weight: 700; cursor: pointer;
+      text-decoration: none; display: inline-block; transition: background .2s;
+    }
+    .btn-primary:hover { background: #0880b5; }
+    .btn-outline {
+      background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.5);
+      padding: 12px 32px; border-radius: 4px; font-size: 0.9rem; font-weight: 700;
+      cursor: pointer; text-decoration: none; display: inline-block; transition: all .2s;
+    }
+    .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+
+    /* ─── DIESEL COUNTER ──────────────────────────────────── */
+    .counter-section {
+      background: var(--navy); padding: 0;
+      position: relative; z-index: 2;
+    }
+    .counter-inner {
+      display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+      border-top: 3px solid var(--blue);
+    }
+    .counter-card {
+      padding: 36px 30px; text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      position: relative; overflow: hidden;
+    }
+    .counter-card:last-child { border-right: none; }
+    .counter-card.highlight { background: var(--blue); }
+    .counter-card.highlight .counter-value { color: #fff; }
+    .counter-card.highlight .counter-label { color: rgba(255,255,255,0.85); }
+    .counter-value {
+      font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 800;
+      color: #fff; font-family: 'Poppins', sans-serif; line-height: 1;
+      margin-bottom: 8px;
+    }
+    .counter-value .unit { font-size: 0.55em; font-weight: 600; opacity: 0.75; margin-left: 4px; }
+    .counter-label {
+      font-size: 0.78rem; color: rgba(255,255,255,0.55); font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.08em; line-height: 1.4;
+    }
+    .counter-icon { font-size: 1.4rem; margin-bottom: 10px; opacity: 0.6; }
+
+    /* ─── SECTIONS COMMON ─────────────────────────────────── */
+    section { padding: 90px 40px; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-tag {
+      display: inline-block; color: var(--blue); font-size: 0.78rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; color: var(--text);
+      line-height: 1.2; margin-bottom: 16px;
+    }
+    .section-title.light { color: #fff; }
+    .section-lead { font-size: 1.05rem; color: var(--muted); line-height: 1.75; max-width: 660px; margin-bottom: 50px; }
+    .section-lead.light { color: rgba(255,255,255,0.7); }
+    .underline-accent {
+      width: 50px; height: 3px; background: var(--blue); border-radius: 2px;
+      margin-top: 10px; margin-bottom: 30px;
+    }
+
+    /* ─── TECHNOLOGY ──────────────────────────────────────── */
+    .tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+    .tech-card {
+      border-radius: 8px; overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08); transition: transform .25s, box-shadow .25s;
+    }
+    .tech-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.14); }
+    .tech-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
+    .tech-card-body { padding: 24px; }
+    .tech-card-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+    .tech-card-text { font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
+
+    /* ─── PRODUCTS ────────────────────────────────────────── */
+    .products-section { background: var(--gray); }
+    .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .product-card {
+      background: #fff; border-radius: 10px; overflow: hidden;
+      box-shadow: 0 2px 18px rgba(0,0,0,0.07); transition: transform .25s, box-shadow .25s;
+    }
+    .product-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.13); }
+    .product-card-image { position: relative; overflow: hidden; }
+    .product-card-image img { width: 100%; height: 260px; object-fit: cover; display: block; transition: transform .4s; }
+    .product-card:hover .product-card-image img { transform: scale(1.04); }
+    .product-card-overlay {
+      position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,27,42,0.6) 0%, transparent 60%);
+      display: flex; align-items: flex-end; padding: 20px;
+    }
+    .product-card-tag {
+      background: var(--blue); color: #fff; font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 3px;
+    }
+    .product-card-body { padding: 24px; }
+    .product-card-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .product-card-text { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 18px; }
+    .product-specs { display: flex; gap: 8px; flex-wrap: wrap; }
+    .spec-pill {
+      background: var(--gray); color: var(--text); font-size: 0.76rem; font-weight: 600;
+      padding: 4px 12px; border-radius: 20px; border: 1px solid var(--border);
+    }
+
+    /* ─── APPLICATIONS ────────────────────────────────────── */
+    .apps-section { background: var(--navy2); }
+    .apps-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 14px; }
+    .app-item { text-align: center; }
+    .app-img-wrap {
+      background: rgba(255,255,255,0.05); border-radius: 10px; padding: 20px;
+      margin-bottom: 12px; transition: background .2s; border: 1px solid rgba(255,255,255,0.07);
+    }
+    .app-item:hover .app-img-wrap { background: rgba(9,159,220,0.12); border-color: var(--blue); }
+    .app-img-wrap img { width: 100%; max-width: 80px; height: 60px; object-fit: contain; display: block; margin: 0 auto; filter: brightness(0) invert(1); opacity: 0.75; }
+    .app-item:hover .app-img-wrap img { opacity: 1; }
+    .app-label { font-size: 0.78rem; color: rgba(255,255,255,0.65); font-weight: 600; line-height: 1.3; }
+
+    /* ─── MISSION / VIDEO ─────────────────────────────────── */
+    .mission-section { background: #fff; }
+    .mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .mission-text .section-lead { margin-bottom: 28px; }
+    .mission-quote {
+      background: var(--gray); border-left: 4px solid var(--blue); padding: 20px 24px;
+      border-radius: 0 6px 6px 0; font-style: italic; color: var(--text); font-size: 1.05rem;
+      line-height: 1.7; margin-bottom: 28px;
+    }
+    .stats-row { display: flex; gap: 30px; flex-wrap: wrap; }
+    .stat-item { }
+    .stat-num { font-size: 2rem; font-weight: 800; color: var(--blue); font-family: 'Poppins', sans-serif; line-height: 1; }
+    .stat-desc { font-size: 0.82rem; color: var(--muted); font-weight: 600; margin-top: 4px; }
+    .video-wrap {
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 0 16px 60px rgba(0,0,0,0.15);
+    }
+    .video-wrap video { width: 100%; display: block; }
+
+    /* ─── PARTNERS ────────────────────────────────────────── */
+    .partners-section { background: var(--gray); }
+    .partners-grid { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: center; }
+    .partner-logo-wrap {
+      background: #fff; border-radius: 8px; padding: 16px 28px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06); min-width: 160px;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .partner-logo-wrap:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.12); transform: translateY(-2px); }
+    .partner-logo-wrap img { max-height: 55px; max-width: 160px; object-fit: contain; }
+
+    /* ─── GRANTS ──────────────────────────────────────────── */
+    .grants-section { background: var(--navy); }
+    .grants-label {
+      font-size: 0.78rem; color: rgba(255,255,255,0.45); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 28px;
+    }
+    .grants-logos { display: flex; flex-wrap: wrap; gap: 28px; align-items: center; }
+    .grant-logo-wrap {
+      display: flex; align-items: center; justify-content: center; padding: 10px;
+    }
+    .grant-logo-wrap img { max-height: 70px; max-width: 220px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.8; transition: opacity .2s; }
+    .grant-logo-wrap img:hover { opacity: 1; }
+    .grant-logo-wrap img.no-invert { filter: none; }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    footer {
+      background: #080f17; padding: 50px 40px 30px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; margin-bottom: 40px; }
+    .footer-brand img { height: 36px; margin-bottom: 16px; }
+    .footer-brand p { font-size: 0.88rem; color: rgba(255,255,255,0.45); line-height: 1.7; max-width: 280px; }
+    .footer-col h4 { color: #fff; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 18px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { color: rgba(255,255,255,0.45); font-size: 0.88rem; text-decoration: none; transition: color .2s; }
+    .footer-col ul li a:hover { color: var(--blue); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: 0.82rem; color: rgba(255,255,255,0.3); }
+    .footer-contact { color: rgba(255,255,255,0.35); font-size: 0.82rem; }
+    .footer-contact a { color: var(--blue); text-decoration: none; }
+
+    /* ─── SCROLL TO TOP ───────────────────────────────────── */
+    .scroll-top {
+      position: fixed; bottom: 30px; right: 30px; z-index: 999;
+      width: 44px; height: 44px; background: var(--blue); color: #fff;
+      border: none; border-radius: 50%; cursor: pointer; font-size: 1.1rem;
+      display: none; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(9,159,220,0.4); transition: background .2s;
+    }
+    .scroll-top:hover { background: #0880b5; }
+    .scroll-top.visible { display: flex; }
+
+    /* ─── MOBILE ──────────────────────────────────────────── */
+    @media (max-width: 1100px) {
+      .apps-grid { grid-template-columns: repeat(4, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .counter-inner { grid-template-columns: repeat(2, 1fr); }
+      .tech-grid, .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .mission-grid { grid-template-columns: 1fr; gap: 40px; }
+      section { padding: 60px 20px; }
+    }
+    @media (max-width: 600px) {
+      .counter-inner { grid-template-columns: 1fr 1fr; }
+      .tech-grid, .products-grid { grid-template-columns: 1fr; }
+      .apps-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .hero-content { padding: 110px 20px 40px; }
+      .grants-logos { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ NAVIGATION -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="https://www.artupower.eu/wp-content/uploads/artupower-logo-white-300x79.png" alt="ArtuPower" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="#technology" data-en="Technology" data-lv="Tehnoloģija">Technology</a></li>
+    <li><a href="#products" data-en="Products" data-lv="Produkti">Products</a></li>
+    <li><a href="#applications" data-en="Applications" data-lv="Pielietojums">Applications</a></li>
+    <li><a href="#mission" data-en="Company" data-lv="Uzņēmums">Company</a></li>
+    <li><a href="#partners" data-en="Partners" data-lv="Partneri">Partners</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+    <button class="lang-btn" onclick="setLang('lv')" id="btn-lv">LV</button>
+    <a href="https://ablabs.bikus.lv" target="_blank" class="nav-cta" data-en="Partner Portal" data-lv="Partneru Portāls">Partner Portal</a>
+  </div>
+  <button class="hamburger" aria-label="Menu">☰</button>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════ HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-badge" data-en="Cleantech Innovation" data-lv="Tīro tehnoloģiju inovācija">Cleantech Innovation</span>
+    <h1 class="hero-title">
+      <span data-en="Alternative Fuel" data-lv="Alternatīvā Degviela">Alternative Fuel</span><br>
+      <span data-en="Solutions for" data-lv="Risinājumi">Solutions for</span><br>
+      <span class="blue-word" data-en="Low-Emission Mobility" data-lv="Zemu Emisiju Mobilitātei">Low-Emission Mobility</span>
+    </h1>
+    <p class="hero-subtitle" data-en="ArtuPower enables diesel engines to run on cleaner alkane gas blends — reducing diesel consumption by up to 50% without replacing your existing fleet." data-lv="ArtuPower ļauj dīzeļdzinējiem darboties ar tīrākām alkāna gāzes maisījumiem — samazinot dīzeļa patēriņu par līdz 50%, neaizstājot esošo autoparka tehnikas.">
+      ArtuPower enables diesel engines to run on cleaner alkane gas blends — reducing diesel consumption by up to 50% without replacing your existing fleet.
+    </p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary" data-en="Explore Products" data-lv="Apskatīt Produktus">Explore Products</a>
+      <a href="#mission" class="btn-outline" data-en="Watch Video" data-lv="Skatīt Video">Watch Video</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ DIESEL COUNTER -->
+<div class="counter-section">
+  <div class="counter-inner">
+    <div class="counter-card highlight">
+      <div class="counter-icon">⛽</div>
+      <div class="counter-value"><span id="diesel-counter">0.0</span><span class="unit">L</span></div>
+      <div class="counter-label" id="diesel-label">Estimated diesel savings since you've been on this page</div>
+    </div>
+    <div class="counter-card">
+      <div class="counter-icon">🌿</div>
+      <div class="counter-value"><span id="co2-counter">0.0</span><span class="unit">kg CO₂</span></div>
+      <div class="counter-label" data-en="Estimated CO₂ not emitted this session" data-lv="Aprēķinātais CO₂, kas nav emitēts šajā sesijā">Estimated CO₂ not emitted this session</div>
+    </div>
+    <div class="counter-card">
+      <div class="counter-icon">📉</div>
+      <div class="counter-value">50<span class="unit">%</span></div>
+      <div class="counter-label" data-en="Max diesel reduction per vehicle" data-lv="Maks. dīzeļa samazinājums vienam transportlīdzeklim">Max diesel reduction per vehicle</div>
+    </div>
+    <div class="counter-card">
+      <div class="counter-icon">🚛</div>
+      <div class="counter-value">18<span class="unit">L</span></div>
+      <div class="counter-label" data-en="Max engine displacement supported" data-lv="Maks. atbalstītais motora tilpums">Max engine displacement supported</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ TECHNOLOGY -->
+<section id="technology">
+  <div class="section-inner">
+    <span class="section-tag" data-en="How It Works" data-lv="Kā tas darbojas">How It Works</span>
+    <h2 class="section-title" data-en="The ArtuPower Technology" data-lv="ArtuPower Tehnoloģija">The ArtuPower Technology</h2>
+    <div class="underline-accent"></div>
+    <p class="section-lead" data-en="Our patented H₂O-CH fuel delivery system integrates alkane gas and water vapour into the intake manifold, harmonising combustion and delivering measurable gains in efficiency, torque, and emissions." data-lv="Mūsu patentētā H₂O-CH degvielas padeves sistēma integrē alkāna gāzi un ūdens tvaiku ieplūdes kolektorā, harmonizējot sadegšanu un nodrošinot izmērāmus ieguvumus efektivitātē, griezuma momentā un emisijās.">
+      Our patented H₂O-CH fuel delivery system integrates alkane gas and water vapour into the intake manifold, harmonising combustion and delivering measurable gains in efficiency, torque, and emissions.
+    </p>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <img src="https://www.artupower.eu/wp-content/uploads/2022/06/service-1.jpg" alt="Gas-Diesel Integration" loading="lazy" />
+        <div class="tech-card-body">
+          <h3 class="tech-card-title" data-en="Gas-Diesel Integration" data-lv="Gāzes-Dīzeļa Integrācija">Gas-Diesel Integration</h3>
+          <p class="tech-card-text" data-en="Alkane gas (LPG, CNG, BioLPG, BioCNG) is mixed with water vapour and introduced into the diesel engine intake. The blend is calibrated by the ArtuPower ECU in real time." data-lv="Alkāna gāze (LPG, CNG, BioLPG, BioCNG) tiek sajaukta ar ūdens tvaiku un ievadīta dīzeļdzinēja ieplūdē. Sajaukumu reāllaikā kalibrē ArtuPower ECU.">
+            Alkane gas (LPG, CNG, BioLPG, BioCNG) is mixed with water vapour and introduced into the diesel engine intake. The blend is calibrated by the ArtuPower ECU in real time.
+          </p>
+        </div>
+      </div>
+      <div class="tech-card">
+        <img src="https://www.artupower.eu/wp-content/uploads/2022/06/service-2.jpg" alt="Combustion Optimisation" loading="lazy" />
+        <div class="tech-card-body">
+          <h3 class="tech-card-title" data-en="Combustion Optimisation" data-lv="Sadegšanas Optimizācija">Combustion Optimisation</h3>
+          <p class="tech-card-text" data-en="Water vapour acts as a catalyst, preventing engine knock and stabilising compression temperatures. The result is increased piston pressure, improved torque, and up to 10% efficiency gain." data-lv="Ūdens tvaiks darbojas kā katalizators, novēršot dzinēja klauvēšanu un stabilizējot saspiešanas temperatūras. Rezultāts — palielināts virzuļa spiediens, uzlabots griezuma moments un līdz 10% efektivitātes pieaugums.">
+            Water vapour acts as a catalyst, preventing engine knock and stabilising compression temperatures. The result is increased piston pressure, improved torque, and up to 10% efficiency gain.
+          </p>
+        </div>
+      </div>
+      <div class="tech-card">
+        <img src="https://www.artupower.eu/wp-content/uploads/2022/06/service-3.jpg" alt="Safe Failsafe Design" loading="lazy" />
+        <div class="tech-card-body">
+          <h3 class="tech-card-title" data-en="Safe Failsafe Design" data-lv="Drošs Rezerves Dizains">Safe Failsafe Design</h3>
+          <p class="tech-card-text" data-en="If the ArtuPower system detects any malfunction, the vehicle automatically reverts to diesel-only operation. Full monitoring and control via a dedicated mobile app." data-lv="Ja ArtuPower sistēma atklāj kādu darbtraucējumu, transportlīdzeklis automātiski pārslēdzas uz tikai dīzeļa darbību. Pilna uzraudzība un vadība caur īpašu mobilo lietotni.">
+            If the ArtuPower system detects any malfunction, the vehicle automatically reverts to diesel-only operation. Full monitoring and control via a dedicated mobile app.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ PRODUCTS -->
+<section id="products" class="products-section">
+  <div class="section-inner">
+    <span class="section-tag" data-en="Product Range" data-lv="Produktu Klāsts">Product Range</span>
+    <h2 class="section-title" data-en="Our Products" data-lv="Mūsu Produkti">Our Products</h2>
+    <div class="underline-accent"></div>
+    <p class="section-lead" data-en="Three purpose-built systems covering engines from 3 to 18 litres, across LPG, CNG, BioLPG, and BioCNG fuel variants." data-lv="Trīs mērķtiecīgi veidotas sistēmas dzinējiem no 3 līdz 18 litriem, LPG, CNG, BioLPG un BioCNG degvielas variantiem.">
+      Three purpose-built systems covering engines from 3 to 18 litres, across LPG, CNG, BioLPG, and BioCNG fuel variants.
+    </p>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-card-image">
+          <img src="https://www.artupower.eu/wp-content/uploads/detail3.jpg" alt="ArtuPower for 3L/LPG/BioLPG" loading="lazy" />
+          <div class="product-card-overlay">
+            <span class="product-card-tag">LPG / BioLPG</span>
+          </div>
+        </div>
+        <div class="product-card-body">
+          <h3 class="product-card-title">ArtuPower for 3L/LPG/BioLPG</h3>
+          <p class="product-card-text" data-en="Designed for passenger and light-duty vehicles up to 3L engine displacement. Compatible with standard LPG and bio-derived LPG." data-lv="Paredzēts vieglajiem automobiļiem un vieglajiem kravas transportlīdzekļiem ar motora tilpumu līdz 3 L. Saderīgs ar standarta LPG un bioloģiski iegūtu LPG.">
+            Designed for passenger and light-duty vehicles up to 3L engine displacement. Compatible with standard LPG and bio-derived LPG.
+          </p>
+          <div class="product-specs">
+            <span class="spec-pill">≤3L</span>
+            <span class="spec-pill">LPG</span>
+            <span class="spec-pill">BioLPG</span>
+            <span class="spec-pill" data-en="Passenger" data-lv="Vieglais">Passenger</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-card-image">
+          <img src="https://www.artupower.eu/wp-content/uploads/detail1.jpg" alt="ArtuPower for 18L/LPG/BioCNG" loading="lazy" />
+          <div class="product-card-overlay">
+            <span class="product-card-tag">LPG / BioCNG</span>
+          </div>
+        </div>
+        <div class="product-card-body">
+          <h3 class="product-card-title">ArtuPower for 18L/LPG/BioCNG</h3>
+          <p class="product-card-text" data-en="Heavy-duty solution for trucks, buses, and agricultural machinery up to 18L displacement. Supports LPG and BioCNG fuel variants." data-lv="Smagās nozares risinājums kravas automobiļiem, autobusiem un lauksaimniecības tehnikas ar motoru līdz 18 L. Atbalsta LPG un BioCNG degvielas variantus.">
+            Heavy-duty solution for trucks, buses, and agricultural machinery up to 18L displacement. Supports LPG and BioCNG fuel variants.
+          </p>
+          <div class="product-specs">
+            <span class="spec-pill">≤18L</span>
+            <span class="spec-pill">LPG</span>
+            <span class="spec-pill">BioCNG</span>
+            <span class="spec-pill" data-en="Heavy Duty" data-lv="Smagais">Heavy Duty</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-card-image">
+          <img src="https://www.artupower.eu/wp-content/uploads/detail2.jpg" alt="ArtuPower for 18L/CNG/BioCNG" loading="lazy" />
+          <div class="product-card-overlay">
+            <span class="product-card-tag">CNG / BioCNG</span>
+          </div>
+        </div>
+        <div class="product-card-body">
+          <h3 class="product-card-title">ArtuPower for 18L/CNG/BioCNG</h3>
+          <p class="product-card-text" data-en="Heavy-duty system optimised for CNG and bio-derived compressed natural gas. Ideal for fleets operating near CNG refuelling infrastructure." data-lv="Smagās nozares sistēma, optimizēta CNG un bioloģiski iegūtai saspiestai dabasgāzei. Ideāli piemērots autoparka, kurš darbojas netālu no CNG uzpildes infrastruktūras.">
+            Heavy-duty system optimised for CNG and bio-derived compressed natural gas. Ideal for fleets operating near CNG refuelling infrastructure.
+          </p>
+          <div class="product-specs">
+            <span class="spec-pill">≤18L</span>
+            <span class="spec-pill">CNG</span>
+            <span class="spec-pill">BioCNG</span>
+            <span class="spec-pill" data-en="Heavy Duty" data-lv="Smagais">Heavy Duty</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ APPLICATIONS -->
+<section id="applications" class="apps-section">
+  <div class="section-inner">
+    <span class="section-tag" data-en="Use Cases" data-lv="Pielietojuma Gadījumi">Use Cases</span>
+    <h2 class="section-title light" data-en="Applications &amp; Use Cases" data-lv="Pielietojumi un lietošanas gadījumi">Applications &amp; Use Cases</h2>
+    <div class="underline-accent"></div>
+    <p class="section-lead light" data-en="ArtuPower systems are engineered for a wide range of engine-powered applications, from city cars to maritime vessels." data-lv="ArtuPower sistēmas ir konstruētas plašam ar dzinēju darbināmu lietojumu klāstam — no pilsētas automobiļiem līdz jūras kuģiem.">
+      ArtuPower systems are engineered for a wide range of engine-powered applications, from city cars to maritime vessels.
+    </p>
+    <div class="apps-grid">
+      <div class="app-item">
+        <div class="app-img-wrap">
+          <img src="https://www.artupower.eu/wp-content/uploads/1.png" alt="Passenger vehicles" loading="lazy" />
+        </div>
+        <div class="app-label" data-en="Passenger Vehicles" data-lv="Vieglās Automašīnas">Passenger Vehicles</div>
+      </div>
+      <div class="app-item">
+        <div class="app-img-wrap">
+          <img src="https://www.artupower.eu/wp-content/uploads/2.png" alt="Light duty vehicles" loading="lazy" />
+        </div>
+        <div class="app-label" data-en="Light Duty Vehicles" data-lv="Vieglie Kravas Transport.">Light Duty Vehicles</div>
+      </div>
+      <div class="app-item">
+        <div class="app-img-wrap">
+          <img src="https://www.artupower.eu/wp-content/uploads/3.png" alt="Buses" loading="lazy" />
+        </div>
+        <div class="app-label" data-en="Buses" data-lv="Autobusi">Buses</div>
+      </div>
+      <div class="app-item">
+        <div class="app-img-wrap">
+          <img src="https://www.artupower.eu/wp-content/uploads/4.png" alt="Heavy duty vehicles" loading="lazy" />
+        </div>
+        <div class="app-label" data-en="Heavy Duty Vehicles" data-lv="Smagie Kravas Transport.">Heavy Duty Vehicles</div>
+      </div>
+      <div class="app-item">
+        <div class="app-img-wrap">
+          <img src="https://www.artupower.eu/wp-content/uploads/5.png" alt="Agricultural vehicles" loading="lazy" />
+        </div>
+        <div class="app-label" data-en="Agricultural &amp; Construction" data-lv="Lauksaim. un Celtniec.">Agricultural &amp; Construction</div>
+      </div>
+      <div class="app-item">
+        <div class="app-img-wrap">
+          <img src="https://www.artupower.eu/wp-content/uploads/6.png" alt="Diesel generators" loading="lazy" />
+        </div>
+        <div class="app-label" data-en="Diesel Generators" data-lv="Dīzeļgeneratori">Diesel Generators</div>
+      </div>
+      <div class="app-item">
+        <div class="app-img-wrap">
+          <img src="https://www.artupower.eu/wp-content/uploads/7.png" alt="Maritime" loading="lazy" />
+        </div>
+        <div class="app-label" data-en="Maritime" data-lv="Jūras Transport.">Maritime</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ MISSION + VIDEO -->
+<section id="mission" class="mission-section">
+  <div class="section-inner">
+    <div class="mission-grid">
+      <div class="mission-text">
+        <span class="section-tag" data-en="Our Mission" data-lv="Mūsu Misija">Our Mission</span>
+        <h2 class="section-title" data-en="Working Together for a Green, Competitive and Inclusive World" data-lv="Kopā strādājam zaļākai, konkurētspējīgākai un iekļaujošākai pasaulei">
+          Working Together for a Green, Competitive and Inclusive World
+        </h2>
+        <div class="underline-accent"></div>
+        <p class="section-lead" data-en="ABLabs Ltd is a knowledge-intensive cleantech start-up developing alternative solutions for low-emission mobility. Founded in Jūrmala, Latvia, we bring decades of engineering expertise to one of transport's hardest decarbonisation challenges." data-lv="SIA ABLabs ir uz zināšanām balstīts tīro tehnoloģiju starts, kas izstrādā alternatīvus risinājumus zemu emisiju mobilitātei. Dibināts Jūrmalā, Latvijā, mēs pielietojam desmitgadēm ilgu inženiermākslu vienā no transporta smagākajām dekarbonizācijas problēmām.">
+          ABLabs Ltd is a knowledge-intensive cleantech start-up developing alternative solutions for low-emission mobility. Founded in Jūrmala, Latvia, we bring decades of engineering expertise to one of transport's hardest decarbonisation challenges.
+        </p>
+        <blockquote class="mission-quote" data-en="&ldquo;Our technology proves that the existing diesel fleet can be part of the green transition — not just replaced by it.&rdquo;" data-lv="&ldquo;Mūsu tehnoloģija pierāda, ka esošā dīzeļa autoparka var būt daļa no zaļās pārejas — nevis tikai tikt aizstāta ar to.&rdquo;">
+          &ldquo;Our technology proves that the existing diesel fleet can be part of the green transition — not just replaced by it.&rdquo;
+        </blockquote>
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-num">50%</div>
+            <div class="stat-desc" data-en="diesel reduction potential" data-lv="dīzeļa samazināšanas potenciāls">diesel reduction potential</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">18L</div>
+            <div class="stat-desc" data-en="max engine size" data-lv="maks. motora tilpums">max engine size</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">4</div>
+            <div class="stat-desc" data-en="alt. fuel types supported" data-lv="atbalstīti alt. degvielas veidi">alt. fuel types supported</div>
+          </div>
+        </div>
+      </div>
+      <div class="video-wrap">
+        <video controls autoplay muted loop playsinline preload="metadata">
+          <source src="https://www.artupower.eu/wp-content/uploads/ArtuPower-Video-3-LogoSakums-Captions-720p.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ PARTNERS -->
+<section id="partners" class="partners-section">
+  <div class="section-inner">
+    <span class="section-tag" data-en="Ecosystem" data-lv="Ekosistēma">Ecosystem</span>
+    <h2 class="section-title" data-en="Partners &amp; Collaborators" data-lv="Partneri un sadarbības partneri">Partners &amp; Collaborators</h2>
+    <div class="underline-accent"></div>
+    <p class="section-lead" data-en="ArtuPower is supported by a network of investors, research institutions, and cleantech organisations across Latvia and Europe." data-lv="ArtuPower atbalsta investoru, pētniecības iestāžu un tīro tehnoloģiju organizāciju tīkls Latvijā un Eiropā.">
+      ArtuPower is supported by a network of investors, research institutions, and cleantech organisations across Latvia and Europe.
+    </p>
+    <div class="partners-grid">
+      <div class="partner-logo-wrap">
+        <img src="https://www.artupower.eu/wp-content/uploads/Magnetic_logo2.png" alt="Magnetic" loading="lazy" />
+      </div>
+      <div class="partner-logo-wrap">
+        <img src="https://www.artupower.eu/wp-content/uploads/Green-Tech-Cluster-logo-B-transp-e1508746380971.png" alt="Green Tech Cluster" loading="lazy" />
+      </div>
+      <div class="partner-logo-wrap">
+        <img src="https://www.artupower.eu/wp-content/uploads/Liepaja-University_FSE-e1613323356586.png" alt="Liepāja University FSE" loading="lazy" />
+      </div>
+      <div class="partner-logo-wrap">
+        <img src="https://www.artupower.eu/wp-content/uploads/rtu_logo.png" alt="RTU – Riga Technical University" loading="lazy" />
+      </div>
+      <div class="partner-logo-wrap">
+        <img src="https://www.artupower.eu/wp-content/uploads/norsk-energy.png" alt="Norsk Energi" loading="lazy" />
+      </div>
+      <div class="partner-logo-wrap">
+        <img src="https://www.artupower.eu/wp-content/uploads/cr-logo-full.png" alt="Cleantech Rising" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ GRANTS -->
+<section class="grants-section">
+  <div class="section-inner">
+    <p class="grants-label" data-en="Supported by EU and EEZ Grants" data-lv="Atbalsta ES un EEZ granti">Supported by EU and EEZ Grants</p>
+    <div class="grants-logos">
+      <div class="grant-logo-wrap">
+        <img src="https://www.artupower.eu/wp-content/uploads/LIAA-logo-balts-RGB_mazais-1-1.png" alt="LIAA" loading="lazy" />
+      </div>
+      <div class="grant-logo-wrap">
+        <img src="https://www.artupower.eu/wp-content/uploads/LV_ID_EU_logo_ansamblis_ERDF_RGB-300x64-1.png" alt="EU ERDF Latvia" loading="lazy" class="no-invert" style="filter:brightness(0) invert(1);" />
+      </div>
+      <div class="grant-logo-wrap">
+        <img src="https://www.artupower.eu/wp-content/uploads/Norway_grants_White_h63.png" alt="Norway Grants" loading="lazy" class="no-invert" />
+      </div>
+      <div class="grant-logo-wrap">
+        <img src="https://www.artupower.eu/wp-content/uploads/kic_white_logo.png" alt="KIC InnoEnergy" loading="lazy" class="no-invert" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="https://www.artupower.eu/wp-content/uploads/artupower-logo-white-300x79.png" alt="ArtuPower" />
+        <p data-en="Alternative fuel solutions for low-emission mobility. ABLabs Ltd, Jurkalnes 5, Jūrmala, Latvia." data-lv="Alternatīvās degvielas risinājumi zemu emisiju mobilitātei. SIA ABLabs, Jurkalnes 5, Jūrmala, Latvija.">
+          Alternative fuel solutions for low-emission mobility. ABLabs Ltd, Jurkalnes 5, Jūrmala, Latvia.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4 data-en="Technology" data-lv="Tehnoloģija">Technology</h4>
+        <ul>
+          <li><a href="https://www.artupower.eu/technology/" target="_blank" data-en="How It Works" data-lv="Kā tas darbojas">How It Works</a></li>
+          <li><a href="https://www.artupower.eu/technology/" target="_blank" data-en="H₂O-CH System" data-lv="H₂O-CH Sistēma">H₂O-CH System</a></li>
+          <li><a href="https://www.artupower.eu/technology/" target="_blank" data-en="EU Green Deal" data-lv="ES Zaļais kurss">EU Green Deal</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-en="Products" data-lv="Produkti">Products</h4>
+        <ul>
+          <li><a href="https://www.artupower.eu/products/" target="_blank">3L / LPG / BioLPG</a></li>
+          <li><a href="https://www.artupower.eu/products/" target="_blank">18L / LPG / BioCNG</a></li>
+          <li><a href="https://www.artupower.eu/products/" target="_blank">18L / CNG / BioCNG</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-en="Company" data-lv="Uzņēmums">Company</h4>
+        <ul>
+          <li><a href="https://www.artupower.eu/company/" target="_blank" data-en="About Us" data-lv="Par mums">About Us</a></li>
+          <li><a href="https://www.artupower.eu/news/" target="_blank" data-en="News" data-lv="Ziņas">News</a></li>
+          <li><a href="https://www.artupower.eu/faq/" target="_blank">FAQ</a></li>
+          <li><a href="https://www.artupower.eu/become-business-partner/" target="_blank" data-en="Become a Partner" data-lv="Kļūt par Partneri">Become a Partner</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-en="© 2025 ABLabs Ltd. All rights reserved." data-lv="© 2025 SIA ABLabs. Visas tiesības aizsargātas.">© 2025 ABLabs Ltd. All rights reserved.</p>
+      <p class="footer-contact">
+        <a href="mailto:info@artupower.eu">info@artupower.eu</a> &nbsp;·&nbsp;
+        <a href="tel:+37129214730">+371 29 214 730</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<button class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
+
+<script>
+  /* ── Language system ── */
+  let currentLang = 'en';
+
+  const LABELS = {
+    'diesel-label': {
+      en: "Estimated diesel savings since you've been on this page",
+      lv: "Aptuvenais ietaupītais dīzeļa apjoms, kāmēr Jūs esat šajā mājaslapā"
+    }
+  };
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+
+    // Toggle button states
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-lv').classList.toggle('active', lang === 'lv');
+
+    // Update all data-en / data-lv elements
+    document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+      const val = el.getAttribute('data-' + lang);
+      if (val !== null) el.innerHTML = val;
+    });
+
+    // Update elements that only have data-en/data-lv by iterating both
+    const other = lang === 'en' ? 'lv' : 'en';
+    document.querySelectorAll('[data-' + other + ']:not([data-' + lang + '])').forEach(el => {
+      // no translation — leave as is
+    });
+
+    // Update named labels
+    for (const [id, translations] of Object.entries(LABELS)) {
+      const el = document.getElementById(id);
+      if (el && translations[lang]) el.textContent = translations[lang];
+    }
+  }
+
+  /* ── Diesel counter ── */
+  // Rate: a fleet of 200 trucks each saving ~8L/hour = 1600L/h = 0.4444L/s
+  // Using a visually engaging rate that's still physically plausible
+  const DIESEL_RATE = 0.4444; // litres per second
+  const CO2_PER_LITRE = 2.65;  // kg CO2 per litre diesel
+
+  const startTime = Date.now();
+  const dieselEl = document.getElementById('diesel-counter');
+  const co2El = document.getElementById('co2-counter');
+
+  function updateCounter() {
+    const elapsed = (Date.now() - startTime) / 1000;
+    const litres = elapsed * DIESEL_RATE;
+    const co2 = litres * CO2_PER_LITRE;
+    dieselEl.textContent = litres.toFixed(1);
+    co2El.textContent = co2.toFixed(1);
+  }
+  setInterval(updateCounter, 100);
+
+  /* ── Scroll to top ── */
+  const scrollBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    scrollBtn.classList.toggle('visible', window.scrollY > 400);
+  });
+  scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  /* ── Hamburger (mobile nav) ── */
+  document.querySelector('.hamburger').addEventListener('click', () => {
+    const links = document.querySelector('.nav-links');
+    if (links.style.display === 'flex') {
+      links.style.display = '';
+    } else {
+      links.style.display = 'flex';
+      links.style.flexDirection = 'column';
+      links.style.position = 'absolute';
+      links.style.top = '70px';
+      links.style.left = '0';
+      links.style.right = '0';
+      links.style.background = 'rgba(13,27,42,0.98)';
+      links.style.padding = '20px 40px';
+      links.style.gap = '16px';
+    }
+  });
+
+  /* ── Smooth appear for counter cards on load ── */
+  window.addEventListener('DOMContentLoaded', () => {
+    setLang('en'); // initialise
+  });
+</script>
+</body>
+</html>
