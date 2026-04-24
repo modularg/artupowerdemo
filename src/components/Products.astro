@@ -3,108 +3,165 @@ const products = [
   {
     img:    'https://www.artupower.eu/wp-content/uploads/detail3.jpg',
     tag:    'LPG / BioLPG',
+    tagColor: 'var(--blue2)',
     name:   'ArtuPower for 3L/LPG/BioLPG',
     textEn: 'Designed for passenger and light-duty vehicles up to 3L engine displacement. Compatible with standard LPG and bio-derived LPG.',
     textLv: 'Paredzēts vieglajiem automobiļiem un vieglajiem kravas transportlīdzekļiem ar motora tilpumu līdz 3 L. Saderīgs ar standarta LPG un bioloģiski iegūtu LPG.',
     specs:  ['≤3L', 'LPG', 'BioLPG'],
     specEn: 'Passenger', specLv: 'Vieglais',
+    href:   'https://www.artupower.eu/products/artupower-for-3l-lpg-biolpg/',
   },
   {
     img:    'https://www.artupower.eu/wp-content/uploads/detail1.jpg',
     tag:    'LPG / BioCNG',
+    tagColor: 'var(--green2)',
     name:   'ArtuPower for 18L/LPG/BioCNG',
     textEn: 'Heavy-duty solution for trucks, buses, and agricultural machinery up to 18L displacement. Supports LPG and BioCNG fuel variants.',
     textLv: 'Smagās nozares risinājums kravas automobiļiem, autobusiem un lauksaimniecības tehnikas ar motoru līdz 18 L. Atbalsta LPG un BioCNG degvielas variantus.',
     specs:  ['≤18L', 'LPG', 'BioCNG'],
     specEn: 'Heavy Duty', specLv: 'Smagais',
+    href:   'https://www.artupower.eu/products/artupower-for-18l-lpg-biocng/',
   },
   {
     img:    'https://www.artupower.eu/wp-content/uploads/detail2.jpg',
     tag:    'CNG / BioCNG',
+    tagColor: '#ffa500',
     name:   'ArtuPower for 18L/CNG/BioCNG',
     textEn: 'Heavy-duty system optimised for CNG and bio-derived compressed natural gas. Ideal for fleets operating near CNG refuelling infrastructure.',
     textLv: 'Smagās nozares sistēma, optimizēta CNG un bioloģiski iegūtai saspiestai dabasgāzei. Ideāli piemērots autoparkam, kurš darbojas netālu no CNG uzpildes infrastruktūras.',
     specs:  ['≤18L', 'CNG', 'BioCNG'],
     specEn: 'Heavy Duty', specLv: 'Smagais',
+    href:   'https://www.artupower.eu/products/artupower-for-18l-cng-biocng/',
   },
 ];
 ---
 <section id="products" class="products-section">
   <div class="section-inner">
-    <span class="section-tag" data-en="Product Range" data-lv="Produktu Klāsts">Product Range</span>
-    <h2 class="section-title" data-en="Our Products" data-lv="Mūsu Produkti">Our Products</h2>
-    <div class="underline-accent"></div>
-    <p
-      class="section-lead"
-      data-en="Three purpose-built systems covering engines from 3 to 18 litres, across LPG, CNG, BioLPG, and BioCNG fuel variants."
-      data-lv="Trīs mērķtiecīgi veidotas sistēmas dzinējiem no 3 līdz 18 litriem, LPG, CNG, BioLPG un BioCNG degvielas variantiem."
-    >
-      Three purpose-built systems covering engines from 3 to 18 litres, across LPG, CNG, BioLPG, and BioCNG fuel variants.
-    </p>
+    <div class="section-header reveal">
+      <span class="section-tag" data-en="Product Range" data-lv="Produktu Klāsts">Product Range</span>
+      <h2 class="section-title" data-en="Our Products" data-lv="Mūsu Produkti">Our Products</h2>
+      <div class="underline-accent"></div>
+      <p
+        class="section-lead"
+        data-en="Three purpose-built systems covering engines from 3 to 18 litres, across LPG, CNG, BioLPG, and BioCNG fuel variants."
+        data-lv="Trīs mērķtiecīgi veidotas sistēmas dzinējiem no 3 līdz 18 litriem, LPG, CNG, BioLPG un BioCNG degvielas variantiem."
+      >
+        Three purpose-built systems covering engines from 3 to 18 litres, across LPG, CNG, BioLPG, and BioCNG fuel variants.
+      </p>
+    </div>
 
     <div class="products-grid">
-      {products.map(p => (
-        <div class="product-card">
-          <div class="product-card-image">
-            <img src={p.img} alt={p.name} loading="lazy" />
-            <div class="product-card-overlay">
-              <span class="product-card-tag">{p.tag}</span>
-            </div>
+      {products.map((p, i) => (
+        <a href={p.href} target="_blank" rel="noopener" class={`product-card reveal reveal-delay-${i + 1}`} aria-label={`${p.name} — learn more`}>
+          <div class="product-img-wrap">
+            <img src={p.img} alt={p.name} loading="lazy" width="400" height="260" />
+            <div class="product-img-overlay"></div>
+            <div class="product-tag" style={`--tag: ${p.tagColor};`}>{p.tag}</div>
           </div>
-          <div class="product-card-body">
-            <h3 class="product-card-title">{p.name}</h3>
-            <p class="product-card-text" data-en={p.textEn} data-lv={p.textLv}>{p.textEn}</p>
+          <div class="product-body">
+            <h3 class="product-name">{p.name}</h3>
+            <p class="product-desc" data-en={p.textEn} data-lv={p.textLv}>{p.textEn}</p>
             <div class="product-specs">
-              {p.specs.map(s => <span class="spec-pill">{s}</span>)}
-              <span class="spec-pill" data-en={p.specEn} data-lv={p.specLv}>{p.specEn}</span>
+              {p.specs.map(s => <span class="spec-chip">{s}</span>)}
+              <span class="spec-chip" data-en={p.specEn} data-lv={p.specLv}>{p.specEn}</span>
+            </div>
+            <div class="product-cta">
+              <span data-en="View Details" data-lv="Skatīt detaļas">View Details</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </div>
           </div>
-        </div>
+        </a>
       ))}
     </div>
   </div>
 </section>
 
 <style>
-.products-section { background: var(--gray); }
-.products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.products-section { background: var(--surface-2); }
+.section-header { max-width: 680px; }
 
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* ── Card ── */
 .product-card {
-  background: #fff; border-radius: 10px; overflow: hidden;
-  box-shadow: 0 2px 18px rgba(0,0,0,0.07);
-  transition: transform .25s, box-shadow .25s;
+  display: block;
+  text-decoration: none;
+  background: var(--surface-glass);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  transition: transform var(--t-base) var(--ease-out),
+              box-shadow var(--t-base),
+              border-color var(--t-base);
+  cursor: pointer;
 }
-.product-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.13); }
-
-.product-card-image { position: relative; overflow: hidden; }
-.product-card-image img {
-  width: 100%; height: 260px; object-fit: cover; display: block;
-  transition: transform .4s;
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-2);
 }
-.product-card:hover .product-card-image img { transform: scale(1.04); }
+.product-card:active { transform: scale(0.98) translateY(-4px); }
+.product-card:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
 
-.product-card-overlay {
+/* ── Image ── */
+.product-img-wrap { position: relative; overflow: hidden; height: 240px; }
+.product-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform var(--t-slow) var(--ease-out);
+}
+.product-card:hover .product-img-wrap img { transform: scale(1.06); }
+.product-img-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(13,27,42,0.6) 0%, transparent 60%);
-  display: flex; align-items: flex-end; padding: 20px;
+  background: linear-gradient(to bottom, transparent 30%, var(--surface-2) 100%);
 }
-.product-card-tag {
-  background: var(--blue); color: #fff;
+
+.product-tag {
+  position: absolute; bottom: 16px; left: 16px;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--tag, var(--blue2));
+  color: var(--tag, var(--blue2));
   font-size: 0.72rem; font-weight: 700;
   letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 4px 12px; border-radius: 3px;
-}
-.product-card-body { padding: 24px; }
-.product-card-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
-.product-card-text  { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 18px; }
-.product-specs { display: flex; gap: 8px; flex-wrap: wrap; }
-.spec-pill {
-  background: var(--gray); color: var(--text);
-  font-size: 0.76rem; font-weight: 600;
-  padding: 4px 12px; border-radius: 20px;
-  border: 1px solid var(--border);
+  padding: 5px 12px; border-radius: 100px;
 }
 
-@media (max-width: 900px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+/* ── Body ── */
+.product-body { padding: 22px 22px 24px; }
+.product-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.05rem; font-weight: 700; color: var(--text);
+  margin-bottom: 10px; line-height: 1.3;
+}
+.product-desc {
+  font-size: 0.875rem; color: var(--text-2);
+  line-height: 1.7; margin-bottom: 16px;
+}
+.product-specs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; }
+.spec-chip {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border-2);
+  color: var(--text-2);
+  font-size: 0.74rem; font-weight: 600;
+  padding: 4px 12px; border-radius: 100px;
+  white-space: nowrap;
+}
+.product-cta {
+  display: flex; align-items: center; gap: 6px;
+  color: var(--blue2); font-size: 0.84rem; font-weight: 700;
+  transition: gap var(--t-fast);
+}
+.product-card:hover .product-cta { gap: 10px; }
+
+/* ── Responsive ── */
+@media (max-width: 960px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px) { .products-grid { grid-template-columns: 1fr; } }
 </style>

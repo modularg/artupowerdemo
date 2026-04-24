@@ -1,25 +1,27 @@
 ---
 ---
-<nav>
-  <a href="#" class="nav-logo">
+<nav id="site-nav">
+  <a href="#" class="nav-logo" aria-label="ArtuPower home">
     <img
       src="https://www.artupower.eu/wp-content/uploads/artupower-logo-white-300x79.png"
       alt="ArtuPower"
-      width="150" height="40"
+      width="140" height="37"
     />
   </a>
 
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#technology"  data-en="Technology"   data-lv="Tehnoloģija">Technology</a></li>
-    <li><a href="#products"    data-en="Products"      data-lv="Produkti">Products</a></li>
-    <li><a href="#applications" data-en="Applications" data-lv="Pielietojums">Applications</a></li>
-    <li><a href="#mission"     data-en="Company"       data-lv="Uzņēmums">Company</a></li>
-    <li><a href="#partners"    data-en="Partners"      data-lv="Partneri">Partners</a></li>
+  <ul class="nav-links" id="navLinks" role="list">
+    <li><a href="#technology"   data-en="Technology"    data-lv="Tehnoloģija">Technology</a></li>
+    <li><a href="#products"     data-en="Products"       data-lv="Produkti">Products</a></li>
+    <li><a href="#applications" data-en="Applications"   data-lv="Pielietojums">Applications</a></li>
+    <li><a href="#mission"      data-en="Company"        data-lv="Uzņēmums">Company</a></li>
+    <li><a href="#partners"     data-en="Partners"       data-lv="Partneri">Partners</a></li>
   </ul>
 
   <div class="nav-right">
-    <button class="lang-btn active" id="btn-en" aria-label="Switch to English">EN</button>
-    <button class="lang-btn"        id="btn-lv" aria-label="Switch to Latvian">LV</button>
+    <div class="lang-toggle" role="group" aria-label="Language selector">
+      <button class="lang-btn active" id="btn-en" aria-label="Switch to English">EN</button>
+      <button class="lang-btn"        id="btn-lv" aria-label="Switch to Latvian">LV</button>
+    </div>
     <a
       href="https://ablabs.bikus.lv"
       target="_blank"
@@ -27,75 +29,204 @@
       class="nav-cta"
       data-en="Partner Portal"
       data-lv="Partneru Portāls"
-    >Partner Portal</a>
+    >
+      Partner Portal
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
   </div>
 
-  <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
+  <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<style>
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  background: rgba(13,27,42,0.97); backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 40px; height: 70px;
-}
-.nav-logo img { height: 40px; display: block; }
+<!-- Mobile drawer -->
+<div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+  <ul role="list">
+    <li><a href="#technology"   data-en="Technology"    data-lv="Tehnoloģija">Technology</a></li>
+    <li><a href="#products"     data-en="Products"       data-lv="Produkti">Products</a></li>
+    <li><a href="#applications" data-en="Applications"   data-lv="Pielietojums">Applications</a></li>
+    <li><a href="#mission"      data-en="Company"        data-lv="Uzņēmums">Company</a></li>
+    <li><a href="#partners"     data-en="Partners"       data-lv="Partneri">Partners</a></li>
+  </ul>
+  <div class="drawer-footer">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="drawer-btn-en">EN</button>
+      <button class="lang-btn"        id="drawer-btn-lv">LV</button>
+    </div>
+    <a href="https://ablabs.bikus.lv" target="_blank" rel="noopener" class="nav-cta">
+      Partner Portal
+    </a>
+  </div>
+</div>
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
 
+<style>
+/* ── Nav shell ── */
+#site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; gap: 8px;
+  padding: 0 40px; height: 68px;
+
+  background: rgba(10,21,32,0.6);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  transition: background var(--t-base), box-shadow var(--t-base);
+}
+#site-nav.scrolled {
+  background: rgba(10,21,32,0.92);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+}
+
+.nav-logo { flex-shrink: 0; margin-right: auto; }
+.nav-logo img { display: block; height: 36px; width: auto; }
+
+/* ── Desktop links ── */
 .nav-links {
-  display: flex; gap: 28px; list-style: none;
+  display: flex; gap: 4px; list-style: none;
 }
 .nav-links a {
-  color: rgba(255,255,255,0.85); text-decoration: none;
-  font-size: 0.88rem; font-weight: 600; letter-spacing: 0.02em;
-  transition: color .2s;
+  display: block;
+  color: rgba(255,255,255,0.72);
+  text-decoration: none;
+  font-size: 0.88rem; font-weight: 500;
+  padding: 7px 14px; border-radius: 8px;
+  transition: color var(--t-fast), background var(--t-fast);
 }
-.nav-links a:hover { color: var(--blue); }
+.nav-links a:hover { color: #fff; background: rgba(255,255,255,0.07); }
 
-.nav-right { display: flex; align-items: center; gap: 14px; }
+/* ── Right cluster ── */
+.nav-right { display: flex; align-items: center; gap: 10px; }
 
+.lang-toggle {
+  display: flex;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 3px;
+  gap: 2px;
+}
 .lang-btn {
-  background: transparent;
-  border: 1.5px solid rgba(255,255,255,0.3);
-  color: #fff; padding: 6px 14px; border-radius: 4px;
-  font-size: 0.82rem; font-weight: 700; cursor: pointer;
-  letter-spacing: 0.06em; transition: all .2s;
+  background: transparent; color: rgba(255,255,255,0.5);
+  border: none; padding: 5px 12px; border-radius: 7px;
+  font-size: 0.8rem; font-weight: 700; cursor: pointer;
+  letter-spacing: 0.06em;
+  transition: background var(--t-fast), color var(--t-fast);
+  touch-action: manipulation;
 }
-.lang-btn:hover,
-.lang-btn.active { background: var(--blue); border-color: var(--blue); }
+.lang-btn.active {
+  background: var(--grad-blue);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(9,159,220,0.4);
+}
 
 .nav-cta {
-  background: var(--blue); color: #fff; border: none;
-  padding: 8px 20px; border-radius: 4px;
-  font-size: 0.82rem; font-weight: 700; cursor: pointer;
-  text-decoration: none; letter-spacing: 0.04em; transition: background .2s;
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--grad-blue);
+  color: #fff; border: none;
+  padding: 9px 20px; border-radius: 10px;
+  font-size: 0.84rem; font-weight: 700; cursor: pointer;
+  text-decoration: none; letter-spacing: 0.01em;
+  box-shadow: var(--shadow-blue);
+  transition: transform var(--t-fast) var(--ease-out), filter var(--t-fast), box-shadow var(--t-fast);
+  touch-action: manipulation;
 }
-.nav-cta:hover { background: #0880b5; }
+.nav-cta:hover  { transform: translateY(-1px); filter: brightness(1.1); }
+.nav-cta:active { transform: scale(0.97); }
+.nav-cta svg { transition: transform var(--t-fast) var(--ease-out); }
+.nav-cta:hover svg { transform: translateX(3px); }
 
+/* ── Hamburger ── */
 .hamburger {
-  display: none; background: none; border: none;
-  color: #fff; cursor: pointer; font-size: 1.4rem;
+  display: none; flex-direction: column;
+  justify-content: center; align-items: center;
+  gap: 5px; width: 40px; height: 40px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border); border-radius: 9px;
+  cursor: pointer; flex-shrink: 0;
 }
+.hamburger span {
+  display: block; width: 20px; height: 2px;
+  background: rgba(255,255,255,0.8); border-radius: 2px;
+  transition: all var(--t-base) var(--ease-out);
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-@media (max-width: 900px) {
-  nav { padding: 0 20px; }
+/* ── Mobile drawer ── */
+.mobile-drawer {
+  position: fixed; top: 68px; left: 0; right: 0; z-index: 99;
+  background: rgba(10,21,32,0.97);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 24px 28px;
+  transform: translateY(-12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform var(--t-base) var(--ease-out), opacity var(--t-base);
+}
+.mobile-drawer.open {
+  transform: none;
+  opacity: 1;
+  pointer-events: auto;
+}
+.mobile-drawer ul { list-style: none; display: flex; flex-direction: column; gap: 2px; margin-bottom: 20px; }
+.mobile-drawer ul li a {
+  display: block; color: rgba(255,255,255,0.75);
+  text-decoration: none; font-size: 1rem; font-weight: 500;
+  padding: 11px 14px; border-radius: 10px;
+  transition: all var(--t-fast);
+}
+.mobile-drawer ul li a:hover { background: var(--surface-glass-hover); color: #fff; }
+.drawer-footer { display: flex; gap: 12px; align-items: center; }
+
+.drawer-backdrop {
+  position: fixed; inset: 0; z-index: 98;
+  background: rgba(0,0,0,0.5);
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--t-base);
+}
+.drawer-backdrop.open { opacity: 1; pointer-events: auto; }
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  #site-nav { padding: 0 20px; }
   .nav-links { display: none; }
   .hamburger { display: flex; }
 }
-
-/* Mobile nav open state — applied via JS */
-.nav-links.mobile-open {
-  display: flex; flex-direction: column;
-  position: fixed; top: 70px; left: 0; right: 0;
-  background: rgba(13,27,42,0.99);
-  padding: 24px 28px; gap: 18px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+@media (max-width: 480px) {
+  .nav-cta { display: none; }
 }
 </style>
 
 <script>
-  document.getElementById('hamburger')!.addEventListener('click', () => {
-    document.getElementById('navLinks')!.classList.toggle('mobile-open');
+  const nav       = document.getElementById('site-nav')!;
+  const hamburger = document.getElementById('hamburger')!;
+  const drawer    = document.getElementById('mobileDrawer')!;
+  const backdrop  = document.getElementById('drawerBackdrop')!;
+
+  /* Scrolled state */
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  /* Mobile drawer */
+  function toggleDrawer(open: boolean) {
+    hamburger.classList.toggle('open', open);
+    drawer.classList.toggle('open', open);
+    backdrop.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+    drawer.setAttribute('aria-hidden', String(!open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  hamburger.addEventListener('click', () => {
+    toggleDrawer(!drawer.classList.contains('open'));
   });
+  backdrop.addEventListener('click', () => toggleDrawer(false));
+  drawer.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => toggleDrawer(false))
+  );
 </script>

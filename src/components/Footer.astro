@@ -1,23 +1,40 @@
 ---
 ---
 <footer>
+  <!-- Gradient top border -->
+  <div class="footer-gradient-line" aria-hidden="true"></div>
+
   <div class="footer-inner">
     <div class="footer-grid">
 
+      <!-- Brand column -->
       <div class="footer-brand">
-        <img
-          src="https://www.artupower.eu/wp-content/uploads/artupower-logo-white-300x79.png"
-          alt="ArtuPower"
-          width="150" height="40"
-        />
+        <a href="#" aria-label="ArtuPower home">
+          <img
+            src="https://www.artupower.eu/wp-content/uploads/artupower-logo-white-300x79.png"
+            alt="ArtuPower"
+            width="140" height="37"
+          />
+        </a>
         <p
-          data-en="Alternative fuel solutions for low-emission mobility. ABLabs Ltd, Jurkalnes 5, Jūrmala, Latvia."
-          data-lv="Alternatīvās degvielas risinājumi zemu emisiju mobilitātei. SIA ABLabs, Jurkalnes 5, Jūrmala, Latvija."
+          data-en="Alternative fuel solutions for low-emission mobility. ABLabs Ltd, Jurkalnes 5, Jūrmala, Latvia, LV-2011."
+          data-lv="Alternatīvās degvielas risinājumi zemu emisiju mobilitātei. SIA ABLabs, Jurkalnes 5, Jūrmala, Latvija, LV-2011."
         >
-          Alternative fuel solutions for low-emission mobility. ABLabs Ltd, Jurkalnes 5, Jūrmala, Latvia.
+          Alternative fuel solutions for low-emission mobility. ABLabs Ltd, Jurkalnes 5, Jūrmala, Latvia, LV-2011.
         </p>
+        <div class="footer-contact">
+          <a href="mailto:info@artupower.eu" aria-label="Email ArtuPower">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            info@artupower.eu
+          </a>
+          <a href="tel:+37129214730" aria-label="Call ArtuPower">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.92 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.83 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.16 6.16l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +371 29 214 730
+          </a>
+        </div>
       </div>
 
+      <!-- Technology -->
       <div class="footer-col">
         <h4 data-en="Technology" data-lv="Tehnoloģija">Technology</h4>
         <ul>
@@ -27,6 +44,7 @@
         </ul>
       </div>
 
+      <!-- Products -->
       <div class="footer-col">
         <h4 data-en="Products" data-lv="Produkti">Products</h4>
         <ul>
@@ -36,27 +54,29 @@
         </ul>
       </div>
 
+      <!-- Company -->
       <div class="footer-col">
         <h4 data-en="Company" data-lv="Uzņēmums">Company</h4>
         <ul>
-          <li><a href="https://www.artupower.eu/company/"                  target="_blank" data-en="About Us"          data-lv="Par mums">About Us</a></li>
-          <li><a href="https://www.artupower.eu/news/"                     target="_blank" data-en="News"              data-lv="Ziņas">News</a></li>
-          <li><a href="https://www.artupower.eu/faq/"                      target="_blank">FAQ</a></li>
-          <li><a href="https://www.artupower.eu/become-business-partner/"  target="_blank" data-en="Become a Partner"  data-lv="Kļūt par Partneri">Become a Partner</a></li>
+          <li><a href="https://www.artupower.eu/company/"                 target="_blank" data-en="About Us"         data-lv="Par mums">About Us</a></li>
+          <li><a href="https://www.artupower.eu/news/"                    target="_blank" data-en="News"             data-lv="Ziņas">News</a></li>
+          <li><a href="https://www.artupower.eu/faq/"                     target="_blank">FAQ</a></li>
+          <li><a href="https://www.artupower.eu/become-business-partner/" target="_blank" data-en="Become a Partner" data-lv="Kļūt par Partneri">Become a Partner</a></li>
         </ul>
       </div>
 
     </div>
 
+    <!-- Bottom bar -->
     <div class="footer-bottom">
       <p
         data-en="© 2025 ABLabs Ltd. All rights reserved."
         data-lv="© 2025 SIA ABLabs. Visas tiesības aizsargātas."
       >© 2025 ABLabs Ltd. All rights reserved.</p>
-      <p class="footer-contact">
-        <a href="mailto:info@artupower.eu">info@artupower.eu</a>
-        &nbsp;·&nbsp;
-        <a href="tel:+37129214730">+371 29 214 730</a>
+      <p class="footer-made">
+        Built with
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--green2)" aria-label="love" role="img"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        for a greener world
       </p>
     </div>
   </div>
@@ -64,38 +84,64 @@
 
 <style>
 footer {
-  background: #080f17;
-  padding: 50px 40px 30px;
-  border-top: 1px solid rgba(255,255,255,0.05);
+  background: var(--navy2);
+  position: relative;
 }
-.footer-inner { max-width: 1200px; margin: 0 auto; }
+.footer-gradient-line {
+  height: 2px;
+  background: var(--grad-hero);
+  opacity: 0.6;
+}
+
+.footer-inner { max-width: 1200px; margin: 0 auto; padding: 60px 40px 32px; }
+
 .footer-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 50px;
-  margin-bottom: 40px;
+  gap: 48px;
+  margin-bottom: 48px;
 }
-.footer-brand img   { height: 36px; display: block; margin-bottom: 16px; }
-.footer-brand p     { font-size: 0.88rem; color: rgba(255,255,255,0.4); line-height: 1.7; max-width: 280px; }
 
+/* ── Brand ── */
+.footer-brand img { display: block; height: 34px; width: auto; margin-bottom: 16px; }
+.footer-brand p {
+  font-size: 0.86rem; color: var(--text-3);
+  line-height: 1.7; max-width: 280px; margin-bottom: 20px;
+}
+.footer-contact {
+  display: flex; flex-direction: column; gap: 10px;
+}
+.footer-contact a {
+  display: flex; align-items: center; gap: 8px;
+  color: var(--text-3); font-size: 0.85rem; text-decoration: none;
+  transition: color var(--t-fast);
+}
+.footer-contact a:hover { color: var(--blue2); }
+
+/* ── Cols ── */
 .footer-col h4 {
-  color: #fff; font-size: 0.85rem; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 18px;
+  font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--text-2); margin-bottom: 16px;
 }
-.footer-col ul        { list-style: none; }
-.footer-col ul li     { margin-bottom: 10px; }
-.footer-col ul li a   { color: rgba(255,255,255,0.42); font-size: 0.88rem; text-decoration: none; transition: color .2s; }
-.footer-col ul li a:hover { color: var(--blue); }
+.footer-col ul     { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul a   { color: var(--text-3); font-size: 0.87rem; text-decoration: none; transition: color var(--t-fast); }
+.footer-col ul a:hover { color: var(--blue2); }
 
+/* ── Bottom ── */
 .footer-bottom {
-  border-top: 1px solid rgba(255,255,255,0.06);
+  border-top: 1px solid var(--border);
   padding-top: 24px;
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 12px;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
 }
-.footer-bottom p       { font-size: 0.82rem; color: rgba(255,255,255,0.28); }
-.footer-contact a      { color: var(--blue); text-decoration: none; }
+.footer-bottom p    { font-size: 0.8rem; color: var(--text-3); }
+.footer-made {
+  display: flex; align-items: center; gap: 5px;
+}
 
-@media (max-width: 1100px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
-@media (max-width: 600px)  { .footer-grid { grid-template-columns: 1fr; gap: 28px; } }
+/* ── Responsive ── */
+@media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; } }
+@media (max-width: 600px)  {
+  .footer-inner { padding: 44px 20px 28px; }
+  .footer-grid  { grid-template-columns: 1fr; gap: 28px; }
+}
 </style>

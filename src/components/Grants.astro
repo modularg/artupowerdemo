@@ -1,68 +1,66 @@
 ---
 const grants = [
-  {
-    src: 'https://www.artupower.eu/wp-content/uploads/LIAA-logo-balts-RGB_mazais-1-1.png',
-    alt: 'LIAA – Investment and Development Agency of Latvia',
-  },
-  {
-    src: 'https://www.artupower.eu/wp-content/uploads/LV_ID_EU_logo_ansamblis_ERDF_RGB-300x64-1.png',
-    alt: 'European Regional Development Fund – Latvia',
-  },
-  {
-    src: 'https://www.artupower.eu/wp-content/uploads/Norway_grants_White_h63.png',
-    alt: 'Norway Grants / EEZ',
-  },
-  {
-    src: 'https://www.artupower.eu/wp-content/uploads/kic_white_logo.png',
-    alt: 'KIC InnoEnergy',
-  },
+  { src: 'https://www.artupower.eu/wp-content/uploads/LIAA-logo-balts-RGB_mazais-1-1.png',       alt: 'LIAA – Investment & Development Agency of Latvia' },
+  { src: 'https://www.artupower.eu/wp-content/uploads/LV_ID_EU_logo_ansamblis_ERDF_RGB-300x64-1.png', alt: 'EU ERDF – European Regional Development Fund' },
+  { src: 'https://www.artupower.eu/wp-content/uploads/Norway_grants_White_h63.png',               alt: 'Norway Grants / EEZ' },
+  { src: 'https://www.artupower.eu/wp-content/uploads/kic_white_logo.png',                        alt: 'KIC InnoEnergy' },
 ];
 ---
 <section class="grants-section">
   <div class="section-inner">
-    <p
-      class="grants-label"
-      data-en="Supported by EU and EEZ Grants"
-      data-lv="Atbalsta ES un EEZ granti"
-    >
-      Supported by EU and EEZ Grants
-    </p>
-    <div class="grants-logos">
-      {grants.map(g => (
-        <div class="grant-logo-wrap">
-          <img src={g.src} alt={g.alt} loading="lazy" />
-        </div>
-      ))}
+    <div class="grants-inner reveal">
+      <p class="grants-label" data-en="Supported by EU and EEZ Grants" data-lv="Atbalsta ES un EEZ granti">
+        Supported by EU and EEZ Grants
+      </p>
+      <div class="grants-logos">
+        {grants.map(g => (
+          <div class="grant-item">
+            <img src={g.src} alt={g.alt} loading="lazy" />
+          </div>
+        ))}
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-.grants-section { background: var(--navy); }
+.grants-section {
+  background: var(--surface-2);
+  border-top: 1px solid var(--border);
+  padding: 48px 40px;
+}
+.grants-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
 .grants-label {
-  font-size: 0.78rem;
-  color: rgba(255,255,255,0.45);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-bottom: 28px;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--text-3);
+  white-space: nowrap; flex-shrink: 0;
 }
 .grants-logos {
-  display: flex; flex-wrap: wrap;
-  gap: 28px; align-items: center;
+  display: flex; flex-wrap: wrap; gap: 24px; align-items: center;
 }
-.grant-logo-wrap {
-  display: flex; align-items: center; justify-content: center;
-  padding: 10px;
+.grant-item {
+  padding: 8px;
+  border-radius: var(--r-sm);
+  transition: transform var(--t-base) var(--ease-out), opacity var(--t-base);
+  opacity: 0.6;
 }
-.grant-logo-wrap img {
-  max-height: 70px; max-width: 220px;
-  object-fit: contain;
+.grant-item:hover { transform: scale(1.05); opacity: 1; }
+.grant-item img {
+  max-height: 52px; max-width: 200px;
+  object-fit: contain; display: block;
   filter: brightness(0) invert(1);
-  opacity: 0.82;
-  transition: opacity .2s;
 }
-.grant-logo-wrap img:hover { opacity: 1; }
 
-@media (max-width: 600px) { .grants-logos { gap: 16px; } }
+/* ── Responsive ── */
+@media (max-width: 700px) {
+  .grants-section { padding: 40px 20px; }
+  .grants-inner { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .grants-logos { gap: 16px; }
+}
 </style>
