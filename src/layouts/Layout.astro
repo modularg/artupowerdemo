@@ -1,0 +1,47 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'ArtuPower — Alternative Fuel Solutions for Low-Emission Mobility',
+  description = 'ArtuPower by ABLabs enables diesel engines to run on cleaner LPG/CNG blends, reducing diesel consumption by up to 50%.',
+} = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{title}</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://www.artupower.eu/wp-content/uploads/cropped-ABLabs_logo_favicon-32x32.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Global styles -->
+  <link rel="stylesheet" href="/styles/global.css" />
+</head>
+<body>
+  <slot />
+
+  <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
+
+  <script>
+    // Scroll-to-top
+    const btn = document.getElementById('scrollTop')!;
+    window.addEventListener('scroll', () => {
+      btn.classList.toggle('visible', window.scrollY > 400);
+    });
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  </script>
+</body>
+</html>

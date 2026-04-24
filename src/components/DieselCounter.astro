@@ -1,0 +1,115 @@
+---
+---
+<div class="counter-section">
+  <div class="counter-inner">
+
+    <!-- Highlight card: live session counter -->
+    <div class="counter-card highlight">
+      <div class="counter-icon">⛽</div>
+      <div class="counter-value">
+        <span id="diesel-counter">0.0</span><span class="unit">L</span>
+      </div>
+      <div class="counter-label" id="diesel-label">
+        Estimated diesel savings since you've been on this page
+      </div>
+    </div>
+
+    <div class="counter-card">
+      <div class="counter-icon">🌿</div>
+      <div class="counter-value">
+        <span id="co2-counter">0.0</span><span class="unit">kg CO₂</span>
+      </div>
+      <div
+        class="counter-label"
+        data-en="Estimated CO₂ not emitted this session"
+        data-lv="Aprēķinātais CO₂, kas nav emitēts šajā sesijā"
+      >
+        Estimated CO₂ not emitted this session
+      </div>
+    </div>
+
+    <div class="counter-card">
+      <div class="counter-icon">📉</div>
+      <div class="counter-value">50<span class="unit">%</span></div>
+      <div
+        class="counter-label"
+        data-en="Max diesel reduction per vehicle"
+        data-lv="Maks. dīzeļa samazinājums vienam transportlīdzeklim"
+      >
+        Max diesel reduction per vehicle
+      </div>
+    </div>
+
+    <div class="counter-card">
+      <div class="counter-icon">🚛</div>
+      <div class="counter-value">18<span class="unit">L</span></div>
+      <div
+        class="counter-label"
+        data-en="Max engine displacement supported"
+        data-lv="Maks. atbalstītais motora tilpums"
+      >
+        Max engine displacement supported
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+.counter-section {
+  background: var(--navy);
+  border-top: 3px solid var(--blue);
+}
+.counter-inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.counter-card {
+  padding: 36px 30px; text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+.counter-card:last-child { border-right: none; }
+.counter-card.highlight { background: var(--blue); }
+.counter-card.highlight .counter-value,
+.counter-card.highlight .counter-label { color: #fff; }
+.counter-card.highlight .counter-label { color: rgba(255,255,255,0.88); }
+
+.counter-icon { font-size: 1.4rem; margin-bottom: 10px; opacity: 0.65; }
+.counter-value {
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 800; color: #fff;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1; margin-bottom: 8px;
+}
+.unit { font-size: 0.52em; font-weight: 600; opacity: 0.75; margin-left: 4px; }
+.counter-label {
+  font-size: 0.78rem; color: rgba(255,255,255,0.55);
+  font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.07em; line-height: 1.45;
+}
+
+@media (max-width: 900px) {
+  .counter-inner { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .counter-card { padding: 24px 16px; }
+}
+</style>
+
+<script>
+  // 200 trucks × 8 L/h savings each = 1 600 L/h = 0.4444 L/s
+  const DIESEL_RATE = 0.4444;
+  const CO2_PER_LITRE = 2.65;
+  const start = Date.now();
+
+  const dieselEl = document.getElementById('diesel-counter')!;
+  const co2El    = document.getElementById('co2-counter')!;
+
+  function tick() {
+    const elapsed = (Date.now() - start) / 1000;
+    const litres  = elapsed * DIESEL_RATE;
+    dieselEl.textContent = litres.toFixed(1);
+    co2El.textContent    = (litres * CO2_PER_LITRE).toFixed(1);
+  }
+  setInterval(tick, 100);
+</script>

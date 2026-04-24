@@ -1,0 +1,101 @@
+---
+---
+<nav>
+  <a href="#" class="nav-logo">
+    <img
+      src="https://www.artupower.eu/wp-content/uploads/artupower-logo-white-300x79.png"
+      alt="ArtuPower"
+      width="150" height="40"
+    />
+  </a>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#technology"  data-en="Technology"   data-lv="Tehnoloģija">Technology</a></li>
+    <li><a href="#products"    data-en="Products"      data-lv="Produkti">Products</a></li>
+    <li><a href="#applications" data-en="Applications" data-lv="Pielietojums">Applications</a></li>
+    <li><a href="#mission"     data-en="Company"       data-lv="Uzņēmums">Company</a></li>
+    <li><a href="#partners"    data-en="Partners"      data-lv="Partneri">Partners</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <button class="lang-btn active" id="btn-en" aria-label="Switch to English">EN</button>
+    <button class="lang-btn"        id="btn-lv" aria-label="Switch to Latvian">LV</button>
+    <a
+      href="https://ablabs.bikus.lv"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="nav-cta"
+      data-en="Partner Portal"
+      data-lv="Partneru Portāls"
+    >Partner Portal</a>
+  </div>
+
+  <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
+</nav>
+
+<style>
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(13,27,42,0.97); backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 70px;
+}
+.nav-logo img { height: 40px; display: block; }
+
+.nav-links {
+  display: flex; gap: 28px; list-style: none;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.85); text-decoration: none;
+  font-size: 0.88rem; font-weight: 600; letter-spacing: 0.02em;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--blue); }
+
+.nav-right { display: flex; align-items: center; gap: 14px; }
+
+.lang-btn {
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  color: #fff; padding: 6px 14px; border-radius: 4px;
+  font-size: 0.82rem; font-weight: 700; cursor: pointer;
+  letter-spacing: 0.06em; transition: all .2s;
+}
+.lang-btn:hover,
+.lang-btn.active { background: var(--blue); border-color: var(--blue); }
+
+.nav-cta {
+  background: var(--blue); color: #fff; border: none;
+  padding: 8px 20px; border-radius: 4px;
+  font-size: 0.82rem; font-weight: 700; cursor: pointer;
+  text-decoration: none; letter-spacing: 0.04em; transition: background .2s;
+}
+.nav-cta:hover { background: #0880b5; }
+
+.hamburger {
+  display: none; background: none; border: none;
+  color: #fff; cursor: pointer; font-size: 1.4rem;
+}
+
+@media (max-width: 900px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+}
+
+/* Mobile nav open state — applied via JS */
+.nav-links.mobile-open {
+  display: flex; flex-direction: column;
+  position: fixed; top: 70px; left: 0; right: 0;
+  background: rgba(13,27,42,0.99);
+  padding: 24px 28px; gap: 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+</style>
+
+<script>
+  document.getElementById('hamburger')!.addEventListener('click', () => {
+    document.getElementById('navLinks')!.classList.toggle('mobile-open');
+  });
+</script>

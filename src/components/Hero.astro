@@ -1,0 +1,70 @@
+---
+---
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-badge" data-en="Cleantech Innovation" data-lv="Tīro tehnoloģiju inovācija">
+      Cleantech Innovation
+    </span>
+    <h1 class="hero-title">
+      <span data-en="Alternative Fuel" data-lv="Alternatīvā Degviela">Alternative Fuel</span><br />
+      <span data-en="Solutions for" data-lv="Risinājumi">Solutions for</span><br />
+      <em data-en="Low-Emission Mobility" data-lv="Zemu Emisiju Mobilitātei">Low-Emission Mobility</em>
+    </h1>
+    <p
+      class="hero-subtitle"
+      data-en="ArtuPower enables diesel engines to run on cleaner alkane gas blends — reducing diesel consumption by up to 50% without replacing your existing fleet."
+      data-lv="ArtuPower ļauj dīzeļdzinējiem darboties ar tīrākām alkāna gāzes maisījumiem — samazinot dīzeļa patēriņu par līdz 50%, neaizstājot esošo autoparka tehniku."
+    >
+      ArtuPower enables diesel engines to run on cleaner alkane gas blends — reducing diesel consumption by up to 50% without replacing your existing fleet.
+    </p>
+    <div class="hero-actions">
+      <a href="#products"  class="btn-primary" data-en="Explore Products" data-lv="Apskatīt Produktus">Explore Products</a>
+      <a href="#mission"   class="btn-outline"  data-en="Watch Video"      data-lv="Skatīt Video">Watch Video</a>
+    </div>
+  </div>
+</section>
+
+<style>
+.hero {
+  position: relative; min-height: 100vh;
+  background: url('https://www.artupower.eu/wp-content/uploads/hero-1.jpg') center / cover no-repeat;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.hero::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgba(13,27,42,0.85) 0%,
+    rgba(13,27,42,0.50) 55%,
+    rgba(13,27,42,0.12) 100%
+  );
+}
+.hero-content {
+  position: relative; z-index: 1;
+  padding: 130px 40px 60px;
+  max-width: 740px;
+}
+.hero-badge {
+  display: inline-block;
+  background: var(--blue); color: #fff;
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 3px; margin-bottom: 20px;
+}
+.hero-title {
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 800; color: #fff;
+  line-height: 1.1; text-transform: uppercase;
+  letter-spacing: -0.01em; margin-bottom: 22px;
+}
+.hero-title em { color: var(--blue); font-style: normal; }
+.hero-subtitle {
+  font-size: 1.05rem; color: rgba(255,255,255,0.82);
+  line-height: 1.72; margin-bottom: 36px; max-width: 540px;
+}
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+@media (max-width: 600px) {
+  .hero-content { padding: 110px 20px 40px; }
+}
+</style>

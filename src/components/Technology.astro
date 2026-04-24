@@ -1,0 +1,70 @@
+---
+const cards = [
+  {
+    img: 'https://www.artupower.eu/wp-content/uploads/2022/06/service-1.jpg',
+    titleEn: 'Gas-Diesel Integration',
+    titleLv: 'Gāzes-Dīzeļa Integrācija',
+    textEn:  'Alkane gas (LPG, CNG, BioLPG, BioCNG) is mixed with water vapour and introduced into the diesel engine intake. The blend is calibrated by the ArtuPower ECU in real time.',
+    textLv:  'Alkāna gāze (LPG, CNG, BioLPG, BioCNG) tiek sajaukta ar ūdens tvaiku un ievadīta dīzeļdzinēja ieplūdē. Sajaukumu reāllaikā kalibrē ArtuPower ECU.',
+  },
+  {
+    img: 'https://www.artupower.eu/wp-content/uploads/2022/06/service-2.jpg',
+    titleEn: 'Combustion Optimisation',
+    titleLv: 'Sadegšanas Optimizācija',
+    textEn:  'Water vapour acts as a catalyst, preventing engine knock and stabilising compression temperatures. The result is increased piston pressure, improved torque, and up to 10% efficiency gain.',
+    textLv:  'Ūdens tvaiks darbojas kā katalizators, novēršot dzinēja klauvēšanu un stabilizējot saspiešanas temperatūras. Rezultāts — palielināts virzuļa spiediens, uzlabots griezuma moments un līdz 10% efektivitātes pieaugums.',
+  },
+  {
+    img: 'https://www.artupower.eu/wp-content/uploads/2022/06/service-3.jpg',
+    titleEn: 'Safe Failsafe Design',
+    titleLv: 'Drošs Rezerves Dizains',
+    textEn:  'If the ArtuPower system detects any malfunction, the vehicle automatically reverts to diesel-only operation. Full monitoring and control via a dedicated mobile app.',
+    textLv:  'Ja ArtuPower sistēma atklāj kādu darbtraucējumu, transportlīdzeklis automātiski pārslēdzas uz tikai dīzeļa darbību. Pilna uzraudzība un vadība caur īpašu mobilo lietotni.',
+  },
+];
+---
+<section id="technology">
+  <div class="section-inner">
+    <span class="section-tag" data-en="How It Works" data-lv="Kā tas darbojas">How It Works</span>
+    <h2 class="section-title" data-en="The ArtuPower Technology" data-lv="ArtuPower Tehnoloģija">
+      The ArtuPower Technology
+    </h2>
+    <div class="underline-accent"></div>
+    <p
+      class="section-lead"
+      data-en="Our patented H₂O-CH fuel delivery system integrates alkane gas and water vapour into the intake manifold, harmonising combustion and delivering measurable gains in efficiency, torque, and emissions."
+      data-lv="Mūsu patentētā H₂O-CH degvielas padeves sistēma integrē alkāna gāzi un ūdens tvaiku ieplūdes kolektorā, harmonizējot sadegšanu un nodrošinot izmērāmus ieguvumus efektivitātē, griezuma momentā un emisijās."
+    >
+      Our patented H₂O-CH fuel delivery system integrates alkane gas and water vapour into the intake manifold, harmonising combustion and delivering measurable gains in efficiency, torque, and emissions.
+    </p>
+
+    <div class="tech-grid">
+      {cards.map(c => (
+        <div class="tech-card">
+          <img src={c.img} alt={c.titleEn} loading="lazy" />
+          <div class="tech-card-body">
+            <h3 class="tech-card-title" data-en={c.titleEn} data-lv={c.titleLv}>{c.titleEn}</h3>
+            <p  class="tech-card-text"  data-en={c.textEn}  data-lv={c.textLv}>{c.textEn}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+.tech-card {
+  border-radius: 8px; overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  transition: transform .25s, box-shadow .25s;
+}
+.tech-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.14); }
+.tech-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
+.tech-card-body { padding: 24px; }
+.tech-card-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+.tech-card-text  { font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
+
+@media (max-width: 900px) { .tech-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .tech-grid { grid-template-columns: 1fr; } }
+</style>

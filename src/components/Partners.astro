@@ -1,0 +1,61 @@
+---
+const partners = [
+  { src: 'https://www.artupower.eu/wp-content/uploads/Magnetic_logo2.png',                           alt: 'Magnetic' },
+  { src: 'https://www.artupower.eu/wp-content/uploads/Green-Tech-Cluster-logo-B-transp-e1508746380971.png', alt: 'Green Tech Cluster' },
+  { src: 'https://www.artupower.eu/wp-content/uploads/Liepaja-University_FSE-e1613323356586.png',    alt: 'Liepāja University FSE' },
+  { src: 'https://www.artupower.eu/wp-content/uploads/rtu_logo.png',                                 alt: 'RTU – Riga Technical University' },
+  { src: 'https://www.artupower.eu/wp-content/uploads/norsk-energy.png',                             alt: 'Norsk Energi' },
+  { src: 'https://www.artupower.eu/wp-content/uploads/cr-logo-full.png',                             alt: 'Cleantech Rising' },
+];
+---
+<section id="partners" class="partners-section">
+  <div class="section-inner">
+    <span class="section-tag" data-en="Ecosystem" data-lv="Ekosistēma">Ecosystem</span>
+    <h2
+      class="section-title"
+      data-en="Partners &amp; Collaborators"
+      data-lv="Partneri un Sadarbības Partneri"
+    >
+      Partners &amp; Collaborators
+    </h2>
+    <div class="underline-accent"></div>
+    <p
+      class="section-lead"
+      data-en="ArtuPower is supported by a network of investors, research institutions, and cleantech organisations across Latvia and Europe."
+      data-lv="ArtuPower atbalsta investoru, pētniecības iestāžu un tīro tehnoloģiju organizāciju tīkls Latvijā un Eiropā."
+    >
+      ArtuPower is supported by a network of investors, research institutions, and cleantech organisations across Latvia and Europe.
+    </p>
+
+    <div class="partners-grid">
+      {partners.map(p => (
+        <div class="partner-logo-wrap">
+          <img src={p.src} alt={p.alt} loading="lazy" />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.partners-section { background: var(--gray); }
+.partners-grid {
+  display: flex; flex-wrap: wrap;
+  gap: 24px; align-items: center; justify-content: center;
+}
+.partner-logo-wrap {
+  background: #fff; border-radius: 8px; padding: 16px 28px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  min-width: 160px; min-height: 80px;
+  transition: box-shadow .2s, transform .2s;
+}
+.partner-logo-wrap:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+}
+.partner-logo-wrap img {
+  max-height: 55px; max-width: 160px;
+  object-fit: contain; display: block;
+}
+</style>

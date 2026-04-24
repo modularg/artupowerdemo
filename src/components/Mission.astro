@@ -1,0 +1,100 @@
+---
+---
+<section id="mission" class="mission-section">
+  <div class="section-inner">
+    <div class="mission-grid">
+
+      <div class="mission-text">
+        <span class="section-tag" data-en="Our Mission" data-lv="Mūsu Misija">Our Mission</span>
+        <h2
+          class="section-title"
+          data-en="Working Together for a Green, Competitive and Inclusive World"
+          data-lv="Kopā strādājam zaļākai, konkurētspējīgākai un iekļaujošākai pasaulei"
+        >
+          Working Together for a Green, Competitive and Inclusive World
+        </h2>
+        <div class="underline-accent"></div>
+        <p
+          class="section-lead"
+          data-en="ABLabs Ltd is a knowledge-intensive cleantech start-up developing alternative solutions for low-emission mobility. Founded in Jūrmala, Latvia, we bring decades of engineering expertise to one of transport's hardest decarbonisation challenges."
+          data-lv="SIA ABLabs ir uz zināšanām balstīts tīro tehnoloģiju starts, kas izstrādā alternatīvus risinājumus zemu emisiju mobilitātei. Dibināts Jūrmalā, Latvijā, mēs pielietojam desmitgadēm ilgu inženiermākslu vienā no transporta smagākajām dekarbonizācijas problēmām."
+        >
+          ABLabs Ltd is a knowledge-intensive cleantech start-up developing alternative solutions for low-emission mobility. Founded in Jūrmala, Latvia, we bring decades of engineering expertise to one of transport's hardest decarbonisation challenges.
+        </p>
+        <blockquote
+          class="mission-quote"
+          data-en="&ldquo;Our technology proves that the existing diesel fleet can be part of the green transition — not just replaced by it.&rdquo;"
+          data-lv="&ldquo;Mūsu tehnoloģija pierāda, ka esošā dīzeļa autoparka var būt daļa no zaļās pārejas — nevis tikai tikt aizstāta ar to.&rdquo;"
+        >
+          &ldquo;Our technology proves that the existing diesel fleet can be part of the green transition — not just replaced by it.&rdquo;
+        </blockquote>
+
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-num">50%</div>
+            <div class="stat-desc" data-en="diesel reduction potential" data-lv="dīzeļa samazināšanas potenciāls">diesel reduction potential</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">18L</div>
+            <div class="stat-desc" data-en="max engine size" data-lv="maks. motora tilpums">max engine size</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">4</div>
+            <div class="stat-desc" data-en="alt. fuel types supported" data-lv="atbalstīti alt. degvielas veidi">alt. fuel types supported</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-wrap">
+        <video controls autoplay muted loop playsinline preload="metadata">
+          <source
+            src="https://www.artupower.eu/wp-content/uploads/ArtuPower-Video-3-LogoSakums-Captions-720p.mp4"
+            type="video/mp4"
+          />
+        </video>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+.mission-section { background: #fff; }
+.mission-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.mission-quote {
+  background: var(--gray);
+  border-left: 4px solid var(--blue);
+  padding: 20px 24px;
+  border-radius: 0 6px 6px 0;
+  font-style: italic;
+  color: var(--text);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+.stats-row { display: flex; gap: 30px; flex-wrap: wrap; }
+.stat-num {
+  font-size: 2rem; font-weight: 800;
+  color: var(--blue);
+  font-family: 'Poppins', sans-serif;
+  line-height: 1;
+}
+.stat-desc {
+  font-size: 0.82rem; color: var(--muted);
+  font-weight: 600; margin-top: 4px;
+}
+.video-wrap {
+  border-radius: 12px; overflow: hidden;
+  box-shadow: 0 16px 60px rgba(0,0,0,0.15);
+}
+.video-wrap video { width: 100%; display: block; }
+
+@media (max-width: 900px) {
+  .mission-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+</style>
