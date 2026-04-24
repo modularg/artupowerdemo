@@ -61,14 +61,28 @@ const apps = [
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   text-decoration: none;
+  position: relative;
+  overflow: hidden;
   transition: background var(--t-base), border-color var(--t-base),
               transform var(--t-base) var(--ease-out), box-shadow var(--t-base);
 }
+/* Radial glow that fades in on hover */
+.app-item::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 80% at 50% 60%, rgba(9,159,220,0.18) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity var(--t-base);
+}
+.app-item:hover::before { opacity: 1; }
+
 .app-item:hover {
-  background: rgba(9,159,220,0.08);
-  border-color: rgba(9,159,220,0.3);
-  transform: translateY(-5px);
-  box-shadow: var(--glow-blue), var(--shadow-sm);
+  background: rgba(9,159,220,0.1);
+  border-color: rgba(9,159,220,0.55);
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 0 0 1px rgba(9,159,220,0.3),
+              0 0 24px rgba(9,159,220,0.35),
+              0 16px 40px rgba(0,0,0,0.5);
 }
 .app-item:active { transform: scale(0.97) translateY(-2px); }
 .app-item:focus-visible {
@@ -78,22 +92,48 @@ const apps = [
 .app-icon-wrap {
   width: 72px; height: 56px;
   display: flex; align-items: center; justify-content: center;
+  position: relative;
+  z-index: 1;
+  transition: transform var(--t-base) var(--ease-spring);
 }
+/* Glowing halo behind the icon */
+.app-icon-wrap::after {
+  content: '';
+  position: absolute; inset: -8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(9,159,220,0.5) 0%, transparent 70%);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity var(--t-base), transform var(--t-base) var(--ease-spring);
+  filter: blur(6px);
+}
+.app-item:hover .app-icon-wrap {
+  transform: scale(1.25) translateY(-4px);
+}
+.app-item:hover .app-icon-wrap::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
 .app-icon-wrap img {
   width: 100%; height: 100%;
   object-fit: contain;
   filter: brightness(0) invert(1);
   opacity: 0.5;
-  transition: opacity var(--t-base), filter var(--t-base);
+  transition: opacity var(--t-base), filter var(--t-base) var(--ease-out),
+              drop-shadow var(--t-base);
+  position: relative; z-index: 1;
 }
 .app-item:hover .app-icon-wrap img {
   opacity: 1;
-  filter: brightness(0) invert(1) sepia(1) hue-rotate(170deg) saturate(2);
+  filter: brightness(0) invert(1) sepia(1) hue-rotate(170deg) saturate(3)
+          drop-shadow(0 0 8px rgba(11,191,255,0.9));
 }
 
 .app-label {
   font-size: 0.74rem; font-weight: 600;
   color: var(--text-2); text-align: center; line-height: 1.3;
+  position: relative; z-index: 1;
   transition: color var(--t-base);
 }
 .app-item:hover .app-label { color: var(--blue2); }

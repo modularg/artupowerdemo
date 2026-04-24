@@ -67,7 +67,7 @@
 /* ── Hero shell ── */
 .hero {
   position: relative;
-  min-height: 100dvh;
+  min-height: 70dvh;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -76,29 +76,40 @@
 /* ── Background layers ── */
 .hero-bg { position: absolute; inset: 0; }
 
+/* Dark base + dot-grid texture */
 .hero-img {
   position: absolute; inset: 0;
-  background: url('https://www.artupower.eu/wp-content/uploads/hero-1.jpg') center / cover no-repeat;
+  background-color: #070f1a;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 36px 36px;
 }
 
+/* Diagonal light-streak overlay */
 .hero-overlay {
   position: absolute; inset: 0;
   background:
-    linear-gradient(105deg, rgba(10,21,32,0.93) 0%, rgba(10,21,32,0.65) 55%, rgba(10,21,32,0.2) 100%),
-    linear-gradient(to top, rgba(10,21,32,0.7) 0%, transparent 40%);
+    linear-gradient(118deg,
+      rgba(9,159,220,0.18) 0%,
+      transparent 35%,
+      transparent 65%,
+      rgba(58,172,93,0.10) 100%),
+    linear-gradient(to bottom, transparent 50%, rgba(7,15,26,0.95) 100%),
+    linear-gradient(to right, rgba(7,15,26,0.6) 0%, transparent 60%);
 }
 
-/* Subtle animated gradient mesh */
+/* Animated gradient orbs */
 .hero-mesh {
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse 60% 50% at 75% 40%, rgba(9,159,220,0.12) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 60% at 20% 70%, rgba(58,172,93,0.09) 0%, transparent 70%);
-  animation: meshFloat 12s ease-in-out infinite alternate;
+    radial-gradient(ellipse 55% 60% at 72% 38%, rgba(9,159,220,0.22) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 50% at 15% 75%, rgba(58,172,93,0.16) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 40% at 85% 80%, rgba(11,191,255,0.10) 0%, transparent 60%);
+  animation: meshFloat 10s ease-in-out infinite alternate;
 }
 @keyframes meshFloat {
-  from { opacity: 0.6; transform: scale(1); }
-  to   { opacity: 1;   transform: scale(1.04); }
+  from { opacity: 0.7; transform: scale(1) translateY(0); }
+  to   { opacity: 1;   transform: scale(1.05) translateY(-8px); }
 }
 
 /* ── Floating stat chips ── */
@@ -146,7 +157,7 @@
 /* ── Content ── */
 .hero-content {
   position: relative; z-index: 1;
-  padding: 140px 40px 80px;
+  padding: 110px 40px 56px;
   max-width: 760px;
 }
 
@@ -191,7 +202,7 @@
   margin-bottom: 40px;
 }
 
-.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 32px; }
 
 /* ── Scroll hint ── */
 .scroll-hint {
@@ -223,10 +234,10 @@
 /* ── Responsive ── */
 @media (max-width: 900px) {
   .hero-stat-chips { display: none; }
-  .hero-content { padding: 120px 24px 60px; }
+  .hero-content { padding: 96px 24px 48px; }
 }
 @media (max-width: 480px) {
-  .hero-content { padding: 110px 16px 48px; }
+  .hero-content { padding: 88px 16px 40px; }
   .scroll-hint { display: none; }
 }
 </style>
